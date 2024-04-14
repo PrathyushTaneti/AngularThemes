@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {
@@ -12,6 +12,7 @@ import {
   bellIcon,
   calendarIcon,
   envelopeLinkIcon,
+  folderIcon,
   inboxIcon,
   menuIcon,
   starOutlineIcon,
@@ -24,6 +25,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { ThemeService } from './services/theme.service';
+import { IntlService } from '@progress/kendo-angular-intl';
+import { SeriesLabelsContentArgs } from "@progress/kendo-angular-charts";
+import { ChartsModule } from "@progress/kendo-angular-charts";
 
 @Component({
   selector: 'app-root',
@@ -37,6 +42,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     LabelModule,
     InputsModule,
     DropDownsModule,
+    ChartsModule,
     FormsModule,
     MatMenuModule,
     MatButtonModule,
@@ -46,8 +52,8 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'AngularThemes';
-  protected theme: string = 'bootstrap';
+  protected title = 'AngularThemes';
+  protected theme: string = '';
   public gridData: any[] = [
     {
       ProductID: 1,
@@ -88,6 +94,11 @@ export class AppComponent {
     'Volleyball',
   ];
 
+  public folderSVG: SVGIcon = folderIcon;
+  public onButtonClick(): void {
+    console.log("click");
+  }
+
   public treeItems: any[] = [
     {
       text: 'Furniture',
@@ -108,13 +119,41 @@ export class AppComponent {
     },
   ];
 
+  constructor(private intl: IntlService) {
+    this.SetColorTheme();
+    this.labelContent = this.labelContent.bind(this);
+  }
+
+  public labelContent(args: SeriesLabelsContentArgs): string {
+    return `${args.dataItem.category} years old: ${this.intl.formatNumber(
+      args.dataItem.value,
+      "p2"
+    )}`;
+  }
+
+  protected SetColorTheme(){
+    this.theme = this.colorThemeService.getTheme();
+  }
+
   public value = ['Basketball', 'Cricket'];
   public complexValue = { text: 'Decor', id: 5 };
   public complexArrayValue = [{ text: 'Sofas', id: 3 }];
+  protected colorThemeService = inject(ThemeService);
 
+  public pieData = [
+    { category: "0-14", value: 0.2545 },
+    { category: "15-24", value: 0.1552 },
+    { category: "25-54", value: 0.4059 },
+    { category: "55-64", value: 0.0911 },
+    { category: "65+", value: 0.0933 },
+  ];
+
+  
   ChangeTheme(theme: string) {
-    this.theme = theme;
+    this.colorThemeService.setTheme(theme);
+    this.SetColorTheme();
   }
+
   @Input() selectedItem!: string;
 
   public selected = 'Inbox';

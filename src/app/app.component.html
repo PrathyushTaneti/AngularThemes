@@ -12,7 +12,7 @@
       <span class="mail-box">IQ Dynamics</span>
     </section>
     <section>
-      <button mat-button [matMenuTriggerFor]="menu">
+      <button  class="mx-1"  mat-button [matMenuTriggerFor]="menu">
         <img alt="Profile Picture" src="../assets/profile.jpg" class="profile-pic"/>
       </button>
       <mat-menu #menu="matMenu">
@@ -90,8 +90,10 @@
         </ul>
       </div>
     </kendo-drawer-content>
-    <section class="w-100 border">
-      <kendo-grid [data]="gridData" class="">
+    <section class="w-100 d-flex">
+     <section class="w-50">
+      <section class="page-title">Kendo Controls</section>
+      <kendo-grid [data]="gridData" class="mx-3">
         <kendo-grid-column field="ProductID" title="ID"> </kendo-grid-column>
         <kendo-grid-column field="ProductName" title="Name">
         </kendo-grid-column>
@@ -99,98 +101,663 @@
         </kendo-grid-column>
         <kendo-grid-column field="UnitPrice" title="Price"> </kendo-grid-column>
       </kendo-grid>
-      <section class="px-5 my-4">
+      <section class="px-3 my-4 d-flex flex-column gap-3">
         <kendo-label text="Kendo Switch">
           &nbsp;
           <kendo-switch></kendo-switch>
         </kendo-label>
-        <div class="d-flex flex-column gap-3" style="min-height: 400px">
-          <kendo-label text="AutoComplete">
-            <br />
-            <kendo-autocomplete
-              [data]="listItems"
-              placeholder="Your favorite sport"
+        <kendo-label text="AutoComplete">
+          <br />
+          <kendo-autocomplete
+            [data]="listItems"
+            placeholder="Your favorite sport"
+          >
+          </kendo-autocomplete>
+        </kendo-label>
+
+        <kendo-label text="ComboBox">
+          <br />
+          <kendo-combobox [data]="listItems" value="Basketball">
+          </kendo-combobox>
+        </kendo-label>
+
+        <kendo-label text="DropDownList">
+          <br />
+          <kendo-dropdownlist [data]="listItems" value="Basketball">
+          </kendo-dropdownlist>
+        </kendo-label>
+
+        <kendo-label text="DropDownTree">
+          <br />
+          <kendo-dropdowntree
+            kendoDropDownTreeExpandable
+            [kendoDropDownTreeHierarchyBinding]="treeItems"
+            textField="text"
+            valueField="id"
+            childrenField="items"
+            [value]="complexValue"
+            [popupSettings]="{
+              width: '230px'
+            }"
+            [expandedKeys]="['1']"
+          ></kendo-dropdowntree>
+        </kendo-label>
+
+        <kendo-label text="MultiColumnComboBox">
+          <br />
+          <kendo-multicolumncombobox
+            [data]="gridData"
+            textField="name"
+            valueField="id"
+            placeholder="Select an employee"
+          >
+            <kendo-combobox-column field="name" title="Name" [width]="200">
+            </kendo-combobox-column>
+            <kendo-combobox-column
+              field="title"
+              title="Title"
+              [width]="200"
             >
-            </kendo-autocomplete>
-          </kendo-label>
-
-          <kendo-label text="ComboBox">
-            <br />
-            <kendo-combobox [data]="listItems" value="Basketball">
-            </kendo-combobox>
-          </kendo-label>
-
-          <kendo-label text="DropDownList">
-            <br />
-            <kendo-dropdownlist [data]="listItems" value="Basketball">
-            </kendo-dropdownlist>
-          </kendo-label>
-
-          <kendo-label text="DropDownTree">
-            <br />
-            <kendo-dropdowntree
-              kendoDropDownTreeExpandable
-              [kendoDropDownTreeHierarchyBinding]="treeItems"
-              textField="text"
-              valueField="id"
-              childrenField="items"
-              [value]="complexValue"
-              [popupSettings]="{
-                width: '230px'
-              }"
-              [expandedKeys]="['1']"
-            ></kendo-dropdowntree>
-          </kendo-label>
-
-          <kendo-label text="MultiColumnComboBox">
-            <br />
-            <kendo-multicolumncombobox
-              [data]="gridData"
-              textField="name"
-              valueField="id"
-              placeholder="Select an employee"
+            </kendo-combobox-column>
+            <kendo-combobox-column
+              field="phone"
+              title="Phone"
+              [width]="200"
             >
-              <kendo-combobox-column field="name" title="Name" [width]="200">
-              </kendo-combobox-column>
-              <kendo-combobox-column
-                field="title"
-                title="Title"
-                [width]="200"
-              >
-              </kendo-combobox-column>
-              <kendo-combobox-column
-                field="phone"
-                title="Phone"
-                [width]="200"
-              >
-              </kendo-combobox-column>
-            </kendo-multicolumncombobox>
-          </kendo-label>
+            </kendo-combobox-column>
+          </kendo-multicolumncombobox>
+        </kendo-label>
 
-          <kendo-label text="MultiSelect">
-            <br />
-            <kendo-multiselect
-              [data]="listItems"
-              [value]="value"
-              placeholder="Your favorite sports"
-            ></kendo-multiselect>
-          </kendo-label>
+        <kendo-label text="MultiSelect">
+          <br />
+          <kendo-multiselect
+            [data]="listItems"
+            [value]="value"
+            placeholder="Your favorite sports"
+          ></kendo-multiselect>
+        </kendo-label>
 
-          <kendo-label text="MultiSelectTree">
-            <br />
-            <kendo-multiselecttree
-              kendoMultiSelectTreeExpandable
-              [kendoMultiSelectTreeHierarchyBinding]="treeItems"
-              textField="text"
-              valueField="id"
-              childrenField="items"
-              [expandedKeys]="['0']"
-              [(value)]="complexArrayValue"
-            >
-            </kendo-multiselecttree>
-          </kendo-label>
-        </div>
+        <kendo-label text="MultiSelectTree">
+          <br />
+          <kendo-multiselecttree
+            kendoMultiSelectTreeExpandable
+            [kendoMultiSelectTreeHierarchyBinding]="treeItems"
+            textField="text"
+            valueField="id"
+            childrenField="items"
+            [expandedKeys]="['0']"
+            [(value)]="complexArrayValue"
+          >
+          </kendo-multiselecttree>
+        </kendo-label>
+
       </section>
+     </section>
+     <section class="w-50">
+      <!-- <section class="page-title">Progress</section>
+      <section>
+        <kendo-chart>
+          <kendo-chart-series>
+            <kendo-chart-series-item type="column" [data]="[1, 2, 3, 5]">
+            </kendo-chart-series-item>
+            <kendo-chart-series-item type="column" [data]="[-1, -2, -3, -5]">
+            </kendo-chart-series-item>
+          </kendo-chart-series>
+        </kendo-chart>
+      </section> -->
+      <section class="page-title">Notifications</section>
+      <section class="mx-4 d-flex flex-column notification-content">
+          <span>
+            1 Leave Approved.
+          </span>
+          <span>
+            2 Pending Tasks.
+          </span>
+      </section>
+      <div class="mx-4 mt-4">
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Default Buttons</p>
+          <p>
+            <button class="mx-1" kendoButton (click)="onButtonClick()">Browse</button>
+            <button class="mx-1"  kendoButton (click)="onButtonClick()" [svgIcon]="folderSVG">
+              Browse
+            </button>
+            <button
+            class="mx-1" 
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              title="Browse"
+            ></button>
+          </p>
+          <p>
+            <button  class="mx-1"  kendoButton (click)="onButtonClick()" [disabled]="true">
+              Browse
+            </button>
+            <button
+            class="mx-1" 
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              title="Browse"
+              [disabled]="true"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Default Buttons (Primary)</p>
+          <p>
+            <button  class="mx-1"  kendoButton (click)="onButtonClick()" themeColor="primary">
+              Browse
+            </button>
+            <button
+            class="mx-1" 
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+            class="mx-1" 
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              title="Browse"
+              themeColor="primary"
+            ></button>
+          </p>
+          <p>
+            <button
+            class="mx-1" 
+              kendoButton
+              (click)="onButtonClick()"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+            class="mx-1" 
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+            class="mx-1" 
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              title="Browse"
+              [disabled]="true"
+              themeColor="primary"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Flat Buttons</p>
+          <p>
+            <button  class="mx-1"  kendoButton (click)="onButtonClick()" fillMode="flat">
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+              title="Browse"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="flat"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+              title="Browse"
+              [disabled]="true"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Flat Buttons (Primary)</p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="flat"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+              title="Browse"
+              themeColor="primary"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="flat"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="flat"
+              title="Browse"
+              [disabled]="true"
+              themeColor="primary"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Outline Buttons</p>
+          <p>
+            <button  class="mx-1"  kendoButton (click)="onButtonClick()" fillMode="outline">
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+              title="Browse"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="outline"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+              title="Browse"
+              [disabled]="true"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Outline Buttons (Primary)</p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="outline"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+              title="Browse"
+              themeColor="primary"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="outline"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="outline"
+              title="Browse"
+              [disabled]="true"
+              themeColor="primary"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Link Buttons</p>
+          <p>
+            <button  class="mx-1"  kendoButton (click)="onButtonClick()" fillMode="link">
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+              title="Browse"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="link"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+              title="Browse"
+              [disabled]="true"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Link Buttons (Primary)</p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="link"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+              title="Browse"
+              themeColor="primary"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="link"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="link"
+              title="Browse"
+              [disabled]="true"
+              themeColor="primary"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Clear Buttons</p>
+          <p>
+            <button  class="mx-1"  kendoButton (click)="onButtonClick()" fillMode="clear">
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+              title="Browse"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="clear"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+              [disabled]="true"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+              title="Browse"
+              [disabled]="true"
+            ></button>
+          </p>
+        </div>
+  
+        <div class="col-xs-12 col-sm-6 example-col">
+          <p>Clear Buttons (Primary)</p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="clear"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+              title="Browse"
+              themeColor="primary"
+            ></button>
+          </p>
+          <p>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              fillMode="clear"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+              [disabled]="true"
+              themeColor="primary"
+            >
+              Browse
+            </button>
+            <button
+              kendoButton
+              (click)="onButtonClick()"
+              [svgIcon]="folderSVG"
+              fillMode="clear"
+              title="Browse"
+              [disabled]="true"
+              themeColor="primary"
+            ></button>
+          </p>
+        </div>
+      </div>
+     </section>
     </section>
   </kendo-drawer-container>
 </section>
@@ -219,6 +786,6 @@
       </section>
       </section>
       <kendo-dialog-actions>
-        <button kendoButton (click)="close('yes')">Close</button>
+        <button  class="mx-1"  kendoButton (click)="close('yes')">Close</button>
       </kendo-dialog-actions>
     </kendo-dialog>
